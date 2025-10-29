@@ -15,15 +15,15 @@ class ClienteType extends AbstractType
         $builder
             ->add('razao_social', TextType::class, [
                 'required' => true,
-                'label' => 'Razão Social:*',
+                'label' => 'Razão Social: *',
             ])
             ->add('nome_fantasia', TextType::class, [
                 'required' => true,
-                'label' => 'Nome Fantasia:*',
+                'label' => 'Nome Fantasia: *',
             ])
             ->add('cnpj', TextType::class, [
                 'required' => true,
-                'label' => 'CNPJ:*',
+                'label' => 'CNPJ: *',
             ])
             ->add('ativo');
     }
