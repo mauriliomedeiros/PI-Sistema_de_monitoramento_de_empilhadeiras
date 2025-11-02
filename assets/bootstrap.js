@@ -1,11 +1,14 @@
-import { startStimulusApp } from '@symfony/stimulus-bridge';
+// assets/bootstrap.js
 
-// Registers Stimulus controllers from controllers.json and in the controllers/ directory
-export const app = startStimulusApp(require.context(
-    '@symfony/stimulus-bridge/lazy-controller-loader!./controllers',
-    true,
-    /\.[jt]sx?$/
-));
+// Importa o jQuery e o Bootstrap
+import $ from 'jquery';
+import 'bootstrap';
 
-// register any custom, 3rd party controllers here
-// app.register('some_controller_name', SomeImportedController);
+// Garante que o Bootstrap Toggle (se você for usar) funcione corretamente
+import 'bootstrap4-toggle/js/bootstrap4-toggle.min.js';
+import 'bootstrap4-toggle/css/bootstrap4-toggle.min.css';
+
+// Exemplo opcional: aplicar tooltips automaticamente
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});

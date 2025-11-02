@@ -6,8 +6,17 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
 import './styles/app.scss';
+
+
 
 // start the Stimulus application
 import './bootstrap';
+import 'bootstrap4-toggle/js/bootstrap4-toggle.min.js';
+import 'bootstrap4-toggle/css/bootstrap4-toggle.min.css';
+import $ from 'jquery';
+global.$ = global.jQuery = $;
+
+$(function () {
+    $('[data-toggle="toggle"]').bootstrapToggle();
+});

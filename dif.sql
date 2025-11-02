@@ -1,0 +1,9 @@
+ALTER TABLE empsys.cliente ADD inscricao_estadual VARCHAR(20) DEFAULT NULL;
+ALTER TABLE empsys.cliente ADD telefone VARCHAR(20) DEFAULT NULL;
+ALTER TABLE empsys.cliente ADD email VARCHAR(100) DEFAULT NULL;
+ALTER TABLE empsys.cliente ADD nome_responsavel VARCHAR(100) DEFAULT NULL;
+ALTER TABLE empsys.cliente ADD endereco VARCHAR(255) DEFAULT NULL;
+ALTER TABLE empsys.cliente ADD cidade VARCHAR(100) DEFAULT NULL;
+ALTER TABLE empsys.cliente ADD estado VARCHAR(2) DEFAULT NULL;
+ALTER TABLE empsys.cliente ADD cep VARCHAR(10) DEFAULT NULL;
+ALTER TABLE empsys.cliente ADD data_cadastro TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL;

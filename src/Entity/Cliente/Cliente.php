@@ -52,6 +52,51 @@ class Cliente
      */
     private $empilhadeira;
 
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $inscricaoEstadual;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $telefone;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $nomeResponsavel;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $endereco;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $cidade;
+
+    /**
+     * @ORM\Column(type="string", length=2)
+     */
+    private $estado;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $cep;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dataCadastro;
+
     public function __construct()
     {
         $this->local = new ArrayCollection();
@@ -167,6 +212,114 @@ class Cliente
                 $empilhadeira->setCliente(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getInscricaoEstadual(): ?string
+    {
+        return $this->inscricaoEstadual;
+    }
+
+    public function setInscricaoEstadual(?string $inscricaoEstadual): self
+    {
+        $this->inscricaoEstadual = $inscricaoEstadual;
+
+        return $this;
+    }
+
+    public function getTelefone(): ?string
+    {
+        return $this->telefone;
+    }
+
+    public function setTelefone(string $telefone): self
+    {
+        $this->telefone = $telefone;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getNomeResponsavel(): ?string
+    {
+        return $this->nomeResponsavel;
+    }
+
+    public function setNomeResponsavel(string $nomeResponsavel): self
+    {
+        $this->nomeResponsavel = $nomeResponsavel;
+
+        return $this;
+    }
+
+    public function getEndereco(): ?string
+    {
+        return $this->endereco;
+    }
+
+    public function setEndereco(string $endereco): self
+    {
+        $this->endereco = $endereco;
+
+        return $this;
+    }
+
+    public function getCidade(): ?string
+    {
+        return $this->cidade;
+    }
+
+    public function setCidade(string $cidade): self
+    {
+        $this->cidade = $cidade;
+
+        return $this;
+    }
+
+    public function getEstado(): ?string
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(string $estado): self
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    public function getCep(): ?string
+    {
+        return $this->cep;
+    }
+
+    public function setCep(string $cep): self
+    {
+        $this->cep = $cep;
+
+        return $this;
+    }
+
+    public function getDataCadastro(): ?\DateTimeInterface
+    {
+        return $this->dataCadastro;
+    }
+
+    public function setDataCadastro(\DateTimeInterface $dataCadastro): self
+    {
+        $this->dataCadastro = $dataCadastro;
 
         return $this;
     }

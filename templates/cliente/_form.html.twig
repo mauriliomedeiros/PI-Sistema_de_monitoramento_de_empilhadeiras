@@ -6,22 +6,76 @@
         </div>
 
         <div class="card-body">
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    {{ form_row(form.razao_social) }}
+            <fieldset>
+                <legend>Dados cadastrais</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <span>Razão Social: *</span>
+                        {{ form_row(form.razao_social) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>CNPJ: *</span>
+                        {{ form_row(form.cnpj) }}
+                    </div>
                 </div>
-                <div class="form-group col-md-4">
-                    {{ form_row(form.cnpj) }}
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <span>Nome fantasia: *</span>
+                        {{ form_row(form.nome_fantasia) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Inscrição estadual:</span>
+                        {{ form_row(form.inscricaoEstadual) }}
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    {{ form_row(form.nome_fantasia) }}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <span>Endereço: *</span>
+                        {{ form_row(form.endereco) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Cidade: *</span>
+                        {{ form_row(form.cidade) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Estado: *</span>
+                        {{ form_row(form.estado) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>CEP: *</span>
+                        {{ form_row(form.cep) }}
+                    </div>
                 </div>
-                <div class="form-group col-md-4">
-                    {{ form_row(form.ativo) }}
+            </fieldset>
+            <fieldset>
+                <legend>Contato</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <span>Nome responsável: *</span>
+                        {{ form_row(form.nomeResponsavel) }}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <span>E-mail: *</span>
+                        {{ form_row(form.email) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Telefone: *</span>
+                        {{ form_row(form.telefone) }}
+                    </div>
                 </div>
-            </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <span>Data de cadastro: *</span>
+                        {{ form_row(form.dataCadastro) }}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <span>Ativo: *</span>
+                        {{ form_row(form.ativo) }}
+                    </div>
+                </div>
+            </fieldset>
         </div>
         <div class="card-footer">
             <div class="d-flex justify-content-between">

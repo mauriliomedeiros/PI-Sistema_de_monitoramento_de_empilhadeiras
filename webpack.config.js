@@ -18,7 +18,8 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
     .enableSingleRuntimeChunk()
-    .addStyleEntry('style', './assets/styles/app.scss');
+    .addEntry('app', './assets/app.js') // Arquivo principal JS
+    .addStyleEntry('style', './assets/styles/app.scss'); // Arquivo principal CSS
 
 
 module.exports = Encore.getWebpackConfig();
