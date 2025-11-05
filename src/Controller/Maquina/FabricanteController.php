@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/maquina/fabricante")
+ * @Route("/maquina/fabricante", name="maquina_fabricante_")
  */
 class FabricanteController extends AbstractController
 {
     /**
-     * @Route("/", name="app_maquina_fabricante_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(FabricanteRepository $fabricanteRepository): Response
     {
@@ -26,7 +26,7 @@ class FabricanteController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="app_maquina_fabricante_new", methods={"GET", "POST"})
+     * @Route("/new", name="new", methods={"GET", "POST"})
      */
     public function new(Request $request, FabricanteRepository $fabricanteRepository): Response
     {
@@ -36,7 +36,7 @@ class FabricanteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $fabricanteRepository->add($fabricante);
-            return $this->redirectToRoute('app_maquina_fabricante_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('maquina_fabricante_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('maquina/fabricante/new.html.twig', [
@@ -46,7 +46,7 @@ class FabricanteController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_maquina_fabricante_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(Fabricante $fabricante): Response
     {
@@ -56,7 +56,7 @@ class FabricanteController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_maquina_fabricante_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Fabricante $fabricante, FabricanteRepository $fabricanteRepository): Response
     {
@@ -65,7 +65,7 @@ class FabricanteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $fabricanteRepository->add($fabricante);
-            return $this->redirectToRoute('app_maquina_fabricante_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('maquina_fabricante_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('maquina/fabricante/edit.html.twig', [
@@ -75,7 +75,7 @@ class FabricanteController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_maquina_fabricante_delete", methods={"POST"})
+     * @Route("/{id}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Fabricante $fabricante, FabricanteRepository $fabricanteRepository): Response
     {
@@ -83,6 +83,6 @@ class FabricanteController extends AbstractController
             $fabricanteRepository->remove($fabricante);
         }
 
-        return $this->redirectToRoute('app_maquina_fabricante_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('maquina_fabricante_index', [], Response::HTTP_SEE_OTHER);
     }
 }
