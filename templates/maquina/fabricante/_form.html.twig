@@ -1,4 +1,42 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="container col-md-12">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Cadastro de Fabricante</h5>
+        </div>
+        <div class="card-body">
+            <fieldset>
+                <legend>Dados cadastrais</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <span>Nome: *</span>
+                        {{ form_row(form.nome) }}
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Sistema</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <span>Ativo: *</span>
+                        {{ form_row(form.ativo) }}
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-between">
+                <a href="{{ path('maquina_fabricante_index') }}" class="btn btn-info">
+                    Voltar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    {{ button_label|default('Salvar') }}
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}
