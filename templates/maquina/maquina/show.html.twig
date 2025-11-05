@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maquina{% endblock %}
+
+{% block body %}
+    <h1>Maquina</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ maquina.id }}</td>
+            </tr>
+            <tr>
+                <th>Descricao</th>
+                <td>{{ maquina.descricao }}</td>
+            </tr>
+            <tr>
+                <th>Ativo</th>
+                <td>{{ maquina.ativo ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_maquina_maquina_index') }}">back to list</a>
+
+    <a href="{{ path('app_maquina_maquina_edit', {'id': maquina.id}) }}">edit</a>
+
+    {{ include('maquina/maquina/_delete_form.html.twig') }}
+{% endblock %}

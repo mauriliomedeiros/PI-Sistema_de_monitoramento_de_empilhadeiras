@@ -309,3 +309,13 @@ ALTER TABLE empsys_local.local ADD estado_id INT NOT NULL;
 ALTER TABLE empsys_local.local DROP estado;
 ALTER TABLE empsys_local.local ADD CONSTRAINT FK_FF17737C9F5A440B FOREIGN KEY (estado_id) REFERENCES empsys_local.estado (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 CREATE INDEX IDX_FF17737C9F5A440B ON empsys_local.local (estado_id);
+
+
+CREATE TABLE empsys_maquina.maquina (id SERIAL NOT NULL, modelo_id INT NOT NULL, cliente_id INT DEFAULT NULL, local_id INT DEFAULT NULL, descricao VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id));
+CREATE INDEX IDX_3E48271EC3A9576E ON empsys_maquina.maquina (modelo_id);
+CREATE INDEX IDX_3E48271EDE734E51 ON empsys_maquina.maquina (cliente_id);
+CREATE INDEX IDX_3E48271E5D5A2101 ON empsys_maquina.maquina (local_id);
+ALTER TABLE empsys_maquina.maquina ADD CONSTRAINT FK_3E48271EC3A9576E FOREIGN KEY (modelo_id) REFERENCES empsys_maquina.modelo (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE empsys_maquina.maquina ADD CONSTRAINT FK_3E48271EDE734E51 FOREIGN KEY (cliente_id) REFERENCES empsys_cliente.cliente (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE empsys_maquina.maquina ADD CONSTRAINT FK_3E48271E5D5A2101 FOREIGN KEY (local_id) REFERENCES empsys_local.local (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE empsys_maquina.maquina ADD ativo BOOLEAN NOT NULL;

@@ -3,7 +3,10 @@
 namespace App\Entity\Local;
 
 use App\Entity\Cliente\Cliente;
+use App\Entity\Maquina\Maquina;
 use App\Repository\LocalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,6 +62,16 @@ class Local
      * @ORM\JoinColumn(nullable=false)
      */
     private $estado;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Maquina::class, mappedBy="local")
+     */
+    private $maquinas;
+
+    public function __construct()
+    {
+        $this->maquinas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -157,6 +170,36 @@ class Local
     public function setEstado(?Estado $estado): self
     {
         $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Maquina>
+     */
+    public function getMaquinas(): Collection
+    {
+        return $this->maquinas;
+    }
+
+    public function addMaquina(Maquina $maquina): self
+    {
+        if (!$this->maquinas->contains($maquina)) {
+            $this->maquinas[] = $maquina;
+            $maquina->setLocal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaquina(Maquina $maquina): self
+    {
+        if ($this->maquinas->removeElement($maquina)) {
+            // set the owning side to null (unless already changed)
+            if ($maquina->getLocal() === $this) {
+                $maquina->setLocal(null);
+            }
+        }
 
         return $this;
     }

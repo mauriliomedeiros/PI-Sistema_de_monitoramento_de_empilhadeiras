@@ -5,6 +5,7 @@ namespace App\Entity\Cliente;
 use App\Entity\Local\Estado;
 use App\Entity\Local\Local;
 use App\Entity\Maquina\ListaEmpilhadeira;
+use App\Entity\Maquina\Maquina;
 use App\Repository\ClienteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -99,10 +100,16 @@ class Cliente
      */
     private $estado;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Maquina::class, mappedBy="cliente")
+     */
+    private $maquinas;
+
     public function __construct()
     {
         $this->local = new ArrayCollection();
         $this->empilhadeira = new ArrayCollection();
+        $this->maquinas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -322,6 +329,36 @@ class Cliente
     public function setEstado(?Estado $estado): self
     {
         $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Maquina>
+     */
+    public function getMaquinas(): Collection
+    {
+        return $this->maquinas;
+    }
+
+    public function addMaquina(Maquina $maquina): self
+    {
+        if (!$this->maquinas->contains($maquina)) {
+            $this->maquinas[] = $maquina;
+            $maquina->setCliente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaquina(Maquina $maquina): self
+    {
+        if ($this->maquinas->removeElement($maquina)) {
+            // set the owning side to null (unless already changed)
+            if ($maquina->getCliente() === $this) {
+                $maquina->setCliente(null);
+            }
+        }
 
         return $this;
     }

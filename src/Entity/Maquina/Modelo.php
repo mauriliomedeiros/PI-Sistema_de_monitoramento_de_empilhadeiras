@@ -3,6 +3,8 @@
 namespace App\Entity\Maquina;
 
 use App\Repository\Maquina\ModeloRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,6 +50,16 @@ class Modelo
      * @ORM\Column(type="boolean")
      */
     private $ativo;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Maquina::class, mappedBy="modelo")
+     */
+    private $maquinas;
+
+    public function __construct()
+    {
+        $this->maquinas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -129,5 +141,35 @@ class Modelo
     public function __toString(): string
     {
         return $this->modelo ?? 'Modelo';
+    }
+
+    /**
+     * @return Collection<int, Maquina>
+     */
+    public function getMaquinas(): Collection
+    {
+        return $this->maquinas;
+    }
+
+    public function addMaquina(Maquina $maquina): self
+    {
+        if (!$this->maquinas->contains($maquina)) {
+            $this->maquinas[] = $maquina;
+            $maquina->setModelo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaquina(Maquina $maquina): self
+    {
+        if ($this->maquinas->removeElement($maquina)) {
+            // set the owning side to null (unless already changed)
+            if ($maquina->getModelo() === $this) {
+                $maquina->setModelo(null);
+            }
+        }
+
+        return $this;
     }
 }
