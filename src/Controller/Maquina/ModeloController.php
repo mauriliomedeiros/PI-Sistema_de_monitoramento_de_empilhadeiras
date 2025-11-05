@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/maquina/modelo")
+ * @Route("/maquina/modelo", name="maquina_modelo_")
  */
 class ModeloController extends AbstractController
 {
     /**
-     * @Route("/", name="app_maquina_modelo_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(ModeloRepository $modeloRepository): Response
     {
@@ -26,7 +26,7 @@ class ModeloController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="app_maquina_modelo_new", methods={"GET", "POST"})
+     * @Route("/new", name="new", methods={"GET", "POST"})
      */
     public function new(Request $request, ModeloRepository $modeloRepository): Response
     {
@@ -36,7 +36,7 @@ class ModeloController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $modeloRepository->add($modelo);
-            return $this->redirectToRoute('app_maquina_modelo_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('maquina_modelo_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('maquina/modelo/new.html.twig', [
@@ -46,7 +46,7 @@ class ModeloController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_maquina_modelo_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(Modelo $modelo): Response
     {
@@ -56,7 +56,7 @@ class ModeloController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_maquina_modelo_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Modelo $modelo, ModeloRepository $modeloRepository): Response
     {
@@ -65,7 +65,7 @@ class ModeloController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $modeloRepository->add($modelo);
-            return $this->redirectToRoute('app_maquina_modelo_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('maquina_modelo_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('maquina/modelo/edit.html.twig', [
@@ -75,7 +75,7 @@ class ModeloController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_maquina_modelo_delete", methods={"POST"})
+     * @Route("/{id}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Modelo $modelo, ModeloRepository $modeloRepository): Response
     {
@@ -83,6 +83,6 @@ class ModeloController extends AbstractController
             $modeloRepository->remove($modelo);
         }
 
-        return $this->redirectToRoute('app_maquina_modelo_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('maquina_modelo_index', [], Response::HTTP_SEE_OTHER);
     }
 }
