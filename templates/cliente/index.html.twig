@@ -7,7 +7,7 @@
         <div class="card shadow-sm">
 
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">Clientes</h5>
+                <h5 class="mb-0 text-center">Clientes</h5>
             </div>
             <div class="card-header d-flex justify-content-between">
                 <a href="{{ path('cliente_new') }}" class="btn btn-success">
@@ -25,6 +25,7 @@
                         <th style="width: 20%">Razão Social</th>   {# col-md-1 #}
                         <th style="width: 20%">Nome Fantasia</th>      {# col-md-2 #}
                         <th style="width: 15%">CNPJ</th> {# col-md-1 #}
+                        <th style="width: 15%">Cadastro</th> {# col-md-1 #}
                         <th style="width: 10%">Ativo</th> {# col-md-4 #}
                         <th style="width: 15%">Ações</th>        {# col-md-2 #}
                     </tr>
@@ -36,9 +37,8 @@
                             <td>{{ cliente.razaoSocial }}</td>
                             <td>{{ cliente.nomeFantasia }}</td>
                             <td>{{ cliente.cnpj }}</td>
-                            <td>{{ cliente.ativo }}</td>
-                            {#                            <td>{{ lista_empilhadeira.caracteristicas }}</td>#}
-                            {#                            <td>{{ lista_empilhadeira.aplicacoes }}</td>#}
+                            <td>{{ cliente.dataCadastro|date('d/m/Y') }}</td>
+                            <td>{{ cliente.ativo ? 'Sim' : 'Não' }}</td>
                             <td>
                                 <a href="{{ path('cliente_show', {'id': cliente.id}) }}" class="btn btn-sm btn-outline-primary">Ver</a>
                                 <a href="{{ path('cliente_edit', {'id': cliente.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>

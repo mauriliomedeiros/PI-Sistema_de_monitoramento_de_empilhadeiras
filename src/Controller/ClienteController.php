@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Cliente\Cliente;
 use App\Form\ClienteType;
 use App\Repository\ClienteRepository;
+use DateTime;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +29,7 @@ class ClienteController extends AbstractController
 
     /**
      * @Route("/new", name="cliente_new", methods={"GET", "POST"})
+     * @throws Exception
      */
     public function new(Request $request, ClienteRepository $clienteRepository): Response
     {
@@ -34,7 +37,12 @@ class ClienteController extends AbstractController
         $form = $this->createForm(ClienteType::class, $cliente);
         $form->handleRequest($request);
 
+        dump(date('Y-m-d H:i:s'));
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $dataAtual = new DateTime('now', new \DateTimeZone('America/Sao_Paulo'));
+            $cliente->setDataCadastro($dataAtual);
+            dump($cliente->getDataCadastro());
             $clienteRepository->add($cliente);
             return $this->redirectToRoute('cliente_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Cliente\Cliente;
-use App\Entity\Local;
+use App\Entity\Local\Estado;
+use App\Entity\Local\Local;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,33 +20,50 @@ class LocalType extends AbstractType
         $builder
             ->add('nome', TextType::class, [
                 'required' => true,
-                'label' => 'Nome:*',
+                'label' => false,
             ])
             ->add('endereco', TextType::class, [
                 'required' => true,
-                'label' => 'Endereço:*',
+                'label' => false,
             ])
             ->add('cidade', TextType::class, [
                 'required' => true,
-                'label' => 'Cidade:*',
+                'label' => false,
             ])
-            ->add('estado', TextType::class, [
+            ->add('estado', EntityType::class, [
+                'label' => false,
+                'class' => Estado::class,
                 'required' => true,
-                'label' => 'Estado:*',
+                'placeholder' => '---Selecione---',
             ])
             ->add('cep', TextType::class, [
                 'required' => true,
-                'label' => 'CEP:*',
+                'label' => false,
             ])
             ->add('observacao', TextType::class, [
-                'required' => true,
-                'label' => 'Observação:*',
+                'required' => false,
+                'label' => false,
             ])
             ->add('cliente', EntityType::class, [
                 'class' => Cliente::class,
                 'choice_label' => 'razao_social',
-                'label' => 'Cliente:*',
+                'label' => false,
                 'placeholder' => '---Selecione---',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->where('c.ativo = :ativo')
+                        ->setParameter('ativo', true)
+                        ->orderBy('c.razao_social', 'ASC');
+                },
+            ])
+            ->add('ativo', ChoiceType::class, [
+                'label' => false,
+                'placeholder' => '--Selecione--',
+                'choices' => [
+                    'Sim' => true,
+                    'Não' => false,
+                ],
+                'required' => true,
             ])
         ;
     }

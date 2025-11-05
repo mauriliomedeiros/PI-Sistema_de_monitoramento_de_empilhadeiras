@@ -3,7 +3,7 @@
 namespace App\Entity\Maquina;
 
 use App\Entity\Cliente\Cliente;
-use App\Entity\Local;
+use App\Entity\Local\Local;
 use App\Repository\Maquina\ListaEmpilhadeiraRepository;
 use Doctrine\ORM\Mapping as ORM;
 

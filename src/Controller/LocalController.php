@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Local;
+use App\Entity\Local\Local;
 use App\Form\LocalType;
 use App\Repository\LocalRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

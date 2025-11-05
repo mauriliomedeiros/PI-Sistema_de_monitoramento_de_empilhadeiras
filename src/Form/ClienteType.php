@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Cliente\Cliente;
+use App\Entity\Local\Estado;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -51,15 +53,13 @@ class ClienteType extends AbstractType
                 'required' => true,
                 'label' => false,
             ])
-            ->add('estado', TextType::class, [
-                'required' => true,
+            ->add('estado', EntityType::class, [
                 'label' => false,
+                'class' => Estado::class,
+                'required' => true,
+                'placeholder' => '---Selecione---',
             ])
             ->add('cep', TextType::class, [
-                'required' => true,
-                'label' => false,
-            ])
-            ->add('dataCadastro', TextType::class, [
                 'required' => true,
                 'label' => false,
             ])

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Local;
 
 use App\Entity\Cliente\Cliente;
 use App\Repository\LocalRepository;
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=LocalRepository::class)
- * @ORM\Table(name="empsys.local")
+ * @ORM\Table(name="empsys_local.local")
  */
 class Local
 {
@@ -35,11 +35,6 @@ class Local
     private $cidade;
 
     /**
-     * @ORM\Column(type="string", length=10)
-     */
-    private $estado;
-
-    /**
      * @ORM\Column(type="string", length=15)
      */
     private $cep;
@@ -53,6 +48,17 @@ class Local
      * @ORM\ManyToOne(targetEntity=Cliente::class, inversedBy="local")
      */
     private $cliente;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $ativo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Estado::class, inversedBy="locais")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $estado;
 
     public function getId(): ?int
     {
@@ -95,18 +101,6 @@ class Local
         return $this;
     }
 
-    public function getEstado(): ?string
-    {
-        return $this->estado;
-    }
-
-    public function setEstado(string $estado): self
-    {
-        $this->estado = $estado;
-
-        return $this;
-    }
-
     public function getCep(): ?string
     {
         return $this->cep;
@@ -139,6 +133,30 @@ class Local
     public function setCliente(?Cliente $cliente): self
     {
         $this->cliente = $cliente;
+
+        return $this;
+    }
+
+    public function getAtivo(): ?bool
+    {
+        return $this->ativo;
+    }
+
+    public function setAtivo(bool $ativo): self
+    {
+        $this->ativo = $ativo;
+
+        return $this;
+    }
+
+    public function getEstado(): ?Estado
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(?Estado $estado): self
+    {
+        $this->estado = $estado;
 
         return $this;
     }

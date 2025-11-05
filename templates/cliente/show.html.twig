@@ -5,30 +5,50 @@
     <div class="container col-md-12">
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">Detalhes do Cliente</h5>
+                <h5 class="mb-0">Detalhes do cliente ID: {{ cliente.id }}</h5>
             </div>
 
             <div class="card-body">
                 <div class="row mb-3">
-                    <div class="col-md-2 font-weight-bold">ID:</div>
-                    <div class="col-md-10">{{ cliente.id }}</div>
+                    <div class="col-md-2 font-weight-bold">Razão Social:</div>
+                    <div class="col-md-4">{{ cliente.razaoSocial }}</div>
+                    <div class="col-md-2 font-weight-bold">Nome fantasia:</div>
+                    <div class="col-md-4">{{ cliente.nomeFantasia }}</div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-2 font-weight-bold">Fabricante:</div>
-                    <div class="col-md-10">{{ cliente.razaoSocial }}</div>
+                    <div class="col-md-2 font-weight-bold">CNPJ:</div>
+                    <div class="col-md-4">{{ cliente.cnpj }}</div>
+                    <div class="col-md-2 font-weight-bold">Inscrição estadual:</div>
+                    <div class="col-md-4">
+                        {% if cliente.inscricaoEstadual is defined and cliente.inscricaoEstadual is not null %}
+                            {{ cliente.inscricaoEstadual }}
+                        {% else %}
+                            Isento
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-2 font-weight-bold">Modelo:</div>
-                    <div class="col-md-10">{{ cliente.nomeFantasia }}</div>
+                    <div class="col-md-2 font-weight-bold">Responsável:</div>
+                    <div class="col-md-10">{{ cliente.nomeResponsavel }}</div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-2 font-weight-bold">Carga Total (kg):</div>
-                    <div class="col-md-10">{{ cliente.cnpj }} kg</div>
+                    <div class="col-md-2 font-weight-bold">Telefone:</div>
+                    <div class="col-md-4">{{ cliente.telefone }}</div>
+                    <div class="col-md-2 font-weight-bold">E-mail:</div>
+                    <div class="col-md-4">{{ cliente.email }}</div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-2 font-weight-bold">Características:</div>
-                    <div class="col-md-10">{{ cliente.ativo }}</div>
+                    <div class="col-md-2 font-weight-bold">Endereço:</div>
+                    <div class="col-md-10">{{ cliente.endereco }}, {{ cliente.cidade }}, {{ cliente.estado }} - CEP: {{ cliente.cep }}</div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Data de cadastro:</div>
+                    <div class="col-md-4">{{ cliente.dataCadastro|date('d/m/Y H:i') }}</div>
+                    <div class="col-md-2 font-weight-bold">Ativo:</div>
+                    <div class="col-md-4">{{ cliente.ativo ? 'Sim' : 'Não' }}
+                    </div>
+                </div>
+
             </div>
 
             <div class="card-footer d-flex justify-content-between">

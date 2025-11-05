@@ -2,7 +2,8 @@
 
 namespace App\Entity\Cliente;
 
-use App\Entity\Local;
+use App\Entity\Local\Estado;
+use App\Entity\Local\Local;
 use App\Entity\Maquina\ListaEmpilhadeira;
 use App\Repository\ClienteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ClienteRepository::class)
- * @ORM\Table(name="empsys.cliente")
+ * @ORM\Table(name="empsys_cliente.cliente")
  */
 class Cliente
 {
@@ -33,7 +34,7 @@ class Cliente
     private $nome_fantasia;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=18)
      */
     private $cnpj;
 
@@ -83,11 +84,6 @@ class Cliente
     private $cidade;
 
     /**
-     * @ORM\Column(type="string", length=2)
-     */
-    private $estado;
-
-    /**
      * @ORM\Column(type="string", length=10)
      */
     private $cep;
@@ -96,6 +92,12 @@ class Cliente
      * @ORM\Column(type="datetime")
      */
     private $dataCadastro;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Estado::class, inversedBy="clientes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $estado;
 
     public function __construct()
     {
@@ -288,18 +290,6 @@ class Cliente
         return $this;
     }
 
-    public function getEstado(): ?string
-    {
-        return $this->estado;
-    }
-
-    public function setEstado(string $estado): self
-    {
-        $this->estado = $estado;
-
-        return $this;
-    }
-
     public function getCep(): ?string
     {
         return $this->cep;
@@ -320,6 +310,18 @@ class Cliente
     public function setDataCadastro(\DateTimeInterface $dataCadastro): self
     {
         $this->dataCadastro = $dataCadastro;
+
+        return $this;
+    }
+
+    public function getEstado(): ?Estado
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(?Estado $estado): self
+    {
+        $this->estado = $estado;
 
         return $this;
     }

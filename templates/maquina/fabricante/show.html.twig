@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fabricante{% endblock %}
+
+{% block body %}
+    <h1>Fabricante</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fabricante.id }}</td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <td>{{ fabricante.nome }}</td>
+            </tr>
+            <tr>
+                <th>Ativo</th>
+                <td>{{ fabricante.ativo ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_maquina_fabricante_index') }}">back to list</a>
+
+    <a href="{{ path('app_maquina_fabricante_edit', {'id': fabricante.id}) }}">edit</a>
+
+    {{ include('maquina/fabricante/_delete_form.html.twig') }}
+{% endblock %}

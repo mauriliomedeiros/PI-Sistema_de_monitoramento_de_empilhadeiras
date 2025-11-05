@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Estado;
+use App\Entity\Local\Estado;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;

@@ -263,3 +263,49 @@ Estado: RS
 CEP: 90000-000
 
 Data de Cadastro: 2025-11-01
+
+
+CREATE SCHEMA empsys_local;
+CREATE TABLE empsys_local.estado (id SERIAL NOT NULL, sigla VARCHAR(2) NOT NULL, nome VARCHAR(30) NOT NULL, ddd VARCHAR(2) NOT NULL, PRIMARY KEY(id));
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('AC', 'ACRE', '68' );
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('AL', 'ALAGOAS', '82');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('AP', 'AMAPÁ', '96');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('AM', 'AMAZONAS', '92');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('BA', 'BAHIA', '71');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('CE', 'CEARÁ', '85');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('DF', 'DISTRITO FEDERAL', '61');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('ES', 'ESPÍRITO SANTO', '27');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('GO', 'GOIÁS', '62');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('MA', 'MARANHÃO', '98');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('MT', 'MATO GROSSO', '65');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('MS', 'MATO GROSSO DO SUL', '67');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('MG', 'MINAS GERAIS', '31');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('PA', 'PARÁ', '91');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('PB', 'PARAÍBA', '83');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('PR', 'PARANÁ', '41');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('PE', 'PERNAMBUCO', '81');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('PI', 'PIAUÍ', '86');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('RJ', 'RIO DE JANEIRO', '21');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('RN', 'RIO GRANDE DO NORTE', '84');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('RS', 'RIO GRANDE DO SUL', '51');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('RO', 'RONDÔNIA', '69');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('RR', 'RORAIMA', '95');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('SC', 'SANTA CATARINA', '48');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('SP', 'SÃO PAULO', '11');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('SE', 'SERGIPE', '79');
+INSERT INTO empsys_local.estado (sigla, nome, ddd) VALUES ('TO', 'TOCANTINS', '63');
+
+CREATE SCHEMA empsys_cliente;
+CREATE TABLE empsys_cliente.cliente (id SERIAL NOT NULL, estado_id INT NOT NULL, razao_social VARCHAR(255) NOT NULL, nome_fantasia VARCHAR(255) DEFAULT NULL, cnpj VARCHAR(15) NOT NULL, ativo BOOLEAN NOT NULL, inscricao_estadual VARCHAR(20) DEFAULT NULL, telefone VARCHAR(20) NOT NULL, email VARCHAR(100) NOT NULL, nome_responsavel VARCHAR(100) NOT NULL, endereco VARCHAR(255) NOT NULL, cidade VARCHAR(100) NOT NULL, cep VARCHAR(10) NOT NULL, data_cadastro TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id));
+CREATE INDEX IDX_9CA149CD9F5A440B ON empsys_cliente.cliente (estado_id);
+ALTER TABLE empsys_cliente.cliente ADD CONSTRAINT FK_9CA149CD9F5A440B FOREIGN KEY (estado_id) REFERENCES empsys_local.estado (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE empsys_cliente.cliente ALTER cnpj TYPE VARCHAR(18);
+
+CREATE TABLE empsys_local.local (id SERIAL NOT NULL, cliente_id INT DEFAULT NULL, nome VARCHAR(255) NOT NULL, endereco VARCHAR(255) NOT NULL, cidade VARCHAR(255) NOT NULL, estado VARCHAR(10) NOT NULL, cep VARCHAR(15) NOT NULL, observacao VARCHAR(255) DEFAULT NULL, ativo BOOLEAN NOT NULL, PRIMARY KEY(id));
+CREATE INDEX IDX_FF17737CDE734E51 ON empsys_local.local (cliente_id);
+ALTER TABLE empsys_local.local ADD CONSTRAINT FK_FF17737CDE734E51 FOREIGN KEY (cliente_id) REFERENCES empsys_cliente.cliente (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE empsys_local.local ADD estado_id INT NOT NULL;
+ALTER TABLE empsys_local.local DROP estado;
+ALTER TABLE empsys_local.local ADD CONSTRAINT FK_FF17737C9F5A440B FOREIGN KEY (estado_id) REFERENCES empsys_local.estado (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+CREATE INDEX IDX_FF17737C9F5A440B ON empsys_local.local (estado_id);

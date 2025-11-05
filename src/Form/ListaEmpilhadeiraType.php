@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Cliente\Cliente;
-use App\Entity\Local;
+use App\Entity\Local\Local;
 use App\Entity\Maquina\ListaEmpilhadeira;
 use App\Entity\Maquina\Modelo;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
