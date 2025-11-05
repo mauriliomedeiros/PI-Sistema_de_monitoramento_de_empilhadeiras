@@ -1,30 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Maquina{% endblock %}
+{% block content %}
+    <br>
+    <div class="container col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Detalhes da máquina ID: {{ maquina.id }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Fabricante:</div>
+                    <div class="col-md-4">{{ maquina.modelo.fabricante.nome }}</div>
+                    <div class="col-md-2 font-weight-bold">Modelo:</div>
+                    <div class="col-md-4">{{ maquina.modelo.nome }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Cliente:</div>
+                    <div class="col-md-4">{{ maquina.local.cliente.razaoSocial }}</div>
+                    <div class="col-md-2 font-weight-bold">Local:</div>
+                    <div class="col-md-4">{{ maquina.local.nome }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Ativo:</div>
+                    <div class="col-md-4">{{ maquina.ativo ? 'Sim' : 'Não' }}
+                    </div>
+                </div>
+            </div>
 
-{% block body %}
-    <h1>Maquina</h1>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="{{ path('maquina_index') }}" class="btn btn-info">Voltar</a>
+                <a href="{{ path('maquina_edit', {'id': maquina.id}) }}" class="btn btn-warning">Editar</a>
+            </div>
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ maquina.id }}</td>
-            </tr>
-            <tr>
-                <th>Descricao</th>
-                <td>{{ maquina.descricao }}</td>
-            </tr>
-            <tr>
-                <th>Ativo</th>
-                <td>{{ maquina.ativo ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_maquina_maquina_index') }}">back to list</a>
-
-    <a href="{{ path('app_maquina_maquina_edit', {'id': maquina.id}) }}">edit</a>
-
-    {{ include('maquina/maquina/_delete_form.html.twig') }}
 {% endblock %}
