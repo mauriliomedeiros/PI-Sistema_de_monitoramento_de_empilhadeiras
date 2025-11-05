@@ -46,7 +46,7 @@ class MaquinaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show", methods={"GET"})
+     * @Route("/{id}", name="show", requirements={"id"="\d+"}, methods={"GET"})
      */
     public function show(Maquina $maquina): Response
     {

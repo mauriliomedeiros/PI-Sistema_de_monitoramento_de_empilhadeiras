@@ -20,8 +20,18 @@ class ModeloController extends AbstractController
      */
     public function index(ModeloRepository $modeloRepository): Response
     {
+        dump('oi');
+        try {
+            dump('oi');
+            $modelos = $modeloRepository->findAll();
+        } catch (\Exception $e) {
+            dump('oi');
+            dump($e->getMessage(), $e->getTraceAsString());
+        }
+
+        dump('oi');
         return $this->render('maquina/modelo/index.html.twig', [
-            'modelos' => $modeloRepository->findAll(),
+            'modelos' => $modelos,
         ]);
     }
 
@@ -46,7 +56,7 @@ class ModeloController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show", methods={"GET"})
+     * @Route("/{id}", name="show", requirements={"id"="\d+"}, methods={"GET"})
      */
     public function show(Modelo $modelo): Response
     {

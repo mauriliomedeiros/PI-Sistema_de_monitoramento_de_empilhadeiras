@@ -140,7 +140,7 @@ class Modelo
 
     public function __toString(): string
     {
-        return $this->modelo ?? 'Modelo';
+        return $this->nome ?? 'Modelo';
     }
 
     /**
