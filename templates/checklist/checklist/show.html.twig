@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <br>
+    <div class="container col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Detalhes do checklist ID: {{ checklist.id }} | realizado em: {{ checklist.dataHoraRealizado|date('d/m/Y H:i') }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Máquina ID:</div>
+                    <div class="col-md-4">{{ checklist.maquina.id }}</div>
+                    <div class="col-md-2 font-weight-bold">Operador:</div>
+                    <div class="col-md-4">{{ checklist.operador }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Nível de óleo do motor:</div>
+                    <div class="col-md-2">{{ checklist.nivelOleoMotor }}</div>
+                    <div class="col-md-2 font-weight-bold">Nível de óleo da transmissão:</div>
+                    <div class="col-md-2">{{ checklist.nivelOleoTransmissao }}</div>
+                    <div class="col-md-2 font-weight-bold">Nível do óleo hidráulico:</div>
+                    <div class="col-md-2">{{ checklist.nivelOleoHidraulico }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Nível de água do radiador:</div>
+                    <div class="col-md-2">{{ checklist.nivelAguaRadiador }}</div>
+                    <div class="col-md-2 font-weight-bold">Vazamento de óleo:</div>
+                    <div class="col-md-2">{{ checklist.vazamentoOleo }}</div>
+                    <div class="col-md-2 font-weight-bold">Vazamento (GLP):</div>
+                    <div class="col-md-2">{{ checklist.vazamentoGLP }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Nivel de óleo de freio:</div>
+                    <div class="col-md-2">{{ checklist.nivelOleoFreio }}</div>
+                    <div class="col-md-2 font-weight-bold">Buzina sinalizador sonoro:</div>
+                    <div class="col-md-2">{{ checklist.buzinaSinalizadorSonoro }}</div>
+                    <div class="col-md-2 font-weight-bold">Faróis, lanternas e giroflex:</div>
+                    <div class="col-md-2">{{ checklist.faroisLanternasGiroflex }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Retrovisor:</div>
+                    <div class="col-md-2">{{ checklist.retrovisor }}</div>
+                    <div class="col-md-2 font-weight-bold">Pneus:</div>
+                    <div class="col-md-2">{{ checklist.pneus }}</div>
+                    <div class="col-md-2 font-weight-bold">Checar freio:</div>
+                    <div class="col-md-2">{{ checklist.freio }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Freio de mão:</div>
+                    <div class="col-md-2">{{ checklist.freioDeMao }}</div>
+                    <div class="col-md-2 font-weight-bold">Sistema de direção:</div>
+                    <div class="col-md-2">{{ checklist.sistemaDeDirecao }}</div>
+                    <div class="col-md-2 font-weight-bold">Garfos corrente da torre:</div>
+                    <div class="col-md-2">{{ checklist.garfosCorrenteDaTorre }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Extintor de incêndio:</div>
+                    <div class="col-md-2">{{ checklist.extintorDeIncendio }}</div>
+                    <div class="col-md-2 font-weight-bold">Cinto de segurança e banco:</div>
+                    <div class="col-md-2">{{ checklist.cintoDeSegurancaEBanco }}</div>
+                    <div class="col-md-2 font-weight-bold">Instrumentos do painel:</div>
+                    <div class="col-md-2">{{ checklist.instrumentosDoPainel }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 font-weight-bold">Funcionamento do motor:</div>
+                    <div class="col-md-2">{{ checklist.funcionamentoMotor }}</div>
+                    <div class="col-md-2 font-weight-bold">Pintura e carenagens:</div>
+                    <div class="col-md-2">{{ checklist.pinturaECarenagens }}</div>
+                    <div class="col-md-2 font-weight-bold">Limpeza geral externa:</div>
+                    <div class="col-md-2">{{ checklist.limpezaGeralExterna }}</div>
+                </div>
+                <div class="row mb-3">
+{#                    <div class="col-md-2 font-weight-bold">Ativo:</div>#}
+{#                    <div class="col-md-4">{{ checklist.ativo ? 'Sim' : 'Não' }}#}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-footer d-flex justify-content-between">
+                <a href="{{ path('checklist_index') }}" class="btn btn-info">Voltar</a>
+                <a href="{{ path('checklist_edit', {'id': checklist.id}) }}" class="btn btn-warning">Editar</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

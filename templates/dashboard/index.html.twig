@@ -48,7 +48,19 @@
                             <h6>Empilhadeiras Cadastradas</h6>
                         </div>
                         <div class="card-header text-center">
-                            <h2>4</h2>
+                            <a href="{{ path('maquina_index') }}"><h2>{{ maquinas|length }}</h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow-sm p-3">
+                        <div class="card-header bg-primary text-white p-2">
+                            <h6>Checklists realizados</h6>
+                        </div>
+                        <div class="card-header text-center">
+                            <a href="{{ path('checklist_index') }}"><h2>{{ checklists|length }}</h2></a>
                         </div>
                     </div>
                 </div>

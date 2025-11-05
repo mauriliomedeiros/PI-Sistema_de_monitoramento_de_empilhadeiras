@@ -1,0 +1,146 @@
+{{ form_start(form) }}
+<div class="container col-md-12">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Novo checklist</h5>
+        </div>
+        <div class="card-body">
+            <fieldset>
+                <legend>Dados cadastrais</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <span>Máquina: *</span>
+                        {{ form_row(form.maquina) }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <span>Operador: *</span>
+                        {{ form_row(form.operador) }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <span>Nome: *</span>
+                        {{ form_row(form.nome) }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <span>Nível de óleo do motor: *</span>
+                        {{ form_row(form.nivelOleoMotor) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Nível de óleo da transmissão: *</span>
+                        {{ form_row(form.nivelOleoTransmissao) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Nível do óleo hidráulico: *</span>
+                        {{ form_row(form.nivelOleoHidraulico) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Nível de água do radiador: *</span>
+                        {{ form_row(form.nivelAguaRadiador) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Vazamento de óleo: *</span>
+                        {{ form_row(form.vazamentoOleo) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Vazamento (GLP): *</span>
+                        {{ form_row(form.vazamentoGLP) }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <span>Nivel de óleo de freio: *</span>
+                        {{ form_row(form.nivelOleoFreio) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Buzina sinalizador sonoro: *</span>
+                        {{ form_row(form.buzinaSinalizadorSonoro) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Faróis, lanternas e giroflex: *</span>
+                        {{ form_row(form.faroisLanternasGiroflex) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Retrovisor: *</span>
+                        {{ form_row(form.retrovisor) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Pneus: *</span>
+                        {{ form_row(form.pneus) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Checar freio: *</span>
+                        {{ form_row(form.freio) }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <span>Freio de mão: *</span>
+                        {{ form_row(form.freioDeMao) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Sistema de direção: *</span>
+                        {{ form_row(form.sistemaDeDirecao) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Garfos corrente da torre: *</span>
+                        {{ form_row(form.garfosCorrenteDaTorre) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Extintor de incêndio: *</span>
+                        {{ form_row(form.extintorDeIncendio) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Cinto de segurança e banco: *</span>
+                        {{ form_row(form.cintoDeSegurancaEBanco) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Instrumentos do painel: *</span>
+                        {{ form_row(form.instrumentosDoPainel) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Funcionamento do motor: *</span>
+                        {{ form_row(form.funcionamentoMotor) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Pintura e carenagens: *</span>
+                        {{ form_row(form.pinturaECarenagens) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        <span>Limpeza geral externa: *</span>
+                        {{ form_row(form.limpezaGeralExterna) }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <span>Observações complementares de segurança:</span>
+                        {{ form_row(form.observacoesComplementaresDeSeguranca) }}
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Sistema</legend>
+                <div class="form-row">
+{#                    <div class="form-group col-md-4">#}
+{#                        <span>Ativo: *</span>#}
+{#                        {{ form_row(form.ativo) }}#}
+{#                    </div>#}
+                </div>
+            </fieldset>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-between">
+                <a href="{{ path('checklist_index') }}" class="btn btn-info">
+                    Voltar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    {{ button_label|default('Salvar') }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}
