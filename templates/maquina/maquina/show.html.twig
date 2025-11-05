@@ -25,6 +25,18 @@
                     <div class="col-md-4">{{ maquina.ativo ? 'Sim' : 'Não' }}
                     </div>
                 </div>
+                <div class="row mb-3">
+                    {% if maquina.checklists and maquina.checklists|length > 0 %}
+                        <div class="col-md-12 font-weight-bold">Checklists:</div>
+                        {% for checklist in maquina.checklists %}
+                            <div class="col-md-2 font-weight-bold">ID: <a href="{{ path('checklist_show', {'id': checklist.id}) }}">{{ checklist.id }}</a></div>
+                            <div class="col-md-3"><span class="font-weight-bold">Nome:</span> {{ checklist.nome }}</div>
+                            <div class="col-md-2"><span class="font-weight-bold">Realizado em:</span> {{ checklist.dataHoraRealizado|date('d/m/Y H:i') }}</div>
+                            <div class="col-md-3"><span class="font-weight-bold">Operador:</span> {{ checklist.operador }}</div>
+                            <div class="col-md-2"><span class="font-weight-bold">Status:</span> OK</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
 
             <div class="card-footer d-flex justify-content-between">
