@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Modelo{% endblock %}
+
+{% block body %}
+    <h1>Create new Modelo</h1>
+
+    {{ include('maquina/modelo/_form.html.twig') }}
+
+    <a href="{{ path('app_maquina_modelo_index') }}">back to list</a>
+{% endblock %}

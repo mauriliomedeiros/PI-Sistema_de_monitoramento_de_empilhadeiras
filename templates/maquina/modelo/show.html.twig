@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modelo{% endblock %}
+
+{% block body %}
+    <h1>Modelo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ modelo.id }}</td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <td>{{ modelo.nome }}</td>
+            </tr>
+            <tr>
+                <th>CargaTotal</th>
+                <td>{{ modelo.cargaTotal }}</td>
+            </tr>
+            <tr>
+                <th>Caracteristicas</th>
+                <td>{{ modelo.caracteristicas }}</td>
+            </tr>
+            <tr>
+                <th>Aplicacoes</th>
+                <td>{{ modelo.aplicacoes }}</td>
+            </tr>
+            <tr>
+                <th>Ativo</th>
+                <td>{{ modelo.ativo ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_maquina_modelo_index') }}">back to list</a>
+
+    <a href="{{ path('app_maquina_modelo_edit', {'id': modelo.id}) }}">edit</a>
+
+    {{ include('maquina/modelo/_delete_form.html.twig') }}
+{% endblock %}

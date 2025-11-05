@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modelo index{% endblock %}
+
+{% block body %}
+    <h1>Modelo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>CargaTotal</th>
+                <th>Caracteristicas</th>
+                <th>Aplicacoes</th>
+                <th>Ativo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for modelo in modelos %}
+            <tr>
+                <td>{{ modelo.id }}</td>
+                <td>{{ modelo.nome }}</td>
+                <td>{{ modelo.cargaTotal }}</td>
+                <td>{{ modelo.caracteristicas }}</td>
+                <td>{{ modelo.aplicacoes }}</td>
+                <td>{{ modelo.ativo ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_maquina_modelo_show', {'id': modelo.id}) }}">show</a>
+                    <a href="{{ path('app_maquina_modelo_edit', {'id': modelo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_maquina_modelo_new') }}">Create new</a>
+{% endblock %}
