@@ -24,9 +24,9 @@ class Fabricante
     private $nome;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": true})
      */
-    private $ativo;
+    private $ativo = true;
 
     public function getId(): ?int
     {

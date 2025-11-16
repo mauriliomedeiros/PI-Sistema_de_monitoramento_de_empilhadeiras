@@ -47,9 +47,9 @@ class Modelo
     private $aplicacoes;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": true})
      */
-    private $ativo;
+    private $ativo = true;
 
     /**
      * @ORM\OneToMany(targetEntity=Maquina::class, mappedBy="modelo")

@@ -150,6 +150,11 @@ class Checklist
      */
     private $limpezaGeralExterna;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default": true})
+     */
+    private $ativo = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -463,6 +468,18 @@ class Checklist
     public function setLimpezaGeralExterna(string $limpezaGeralExterna): self
     {
         $this->limpezaGeralExterna = $limpezaGeralExterna;
+
+        return $this;
+    }
+
+    public function getAtivo(): ?bool
+    {
+        return $this->ativo;
+    }
+
+    public function setAtivo(bool $ativo): self
+    {
+        $this->ativo = $ativo;
 
         return $this;
     }

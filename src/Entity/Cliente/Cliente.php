@@ -40,9 +40,9 @@ class Cliente
     private $cnpj;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": true})
      */
-    private $ativo;
+    private $ativo = true;
 
     /**
      * @ORM\OneToMany(targetEntity=Local::class, mappedBy="cliente")

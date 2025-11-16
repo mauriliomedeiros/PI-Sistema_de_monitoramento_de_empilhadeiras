@@ -53,9 +53,9 @@ class Local
     private $cliente;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": true})
      */
-    private $ativo;
+    private $ativo = true;
 
     /**
      * @ORM\ManyToOne(targetEntity=Estado::class, inversedBy="locais")

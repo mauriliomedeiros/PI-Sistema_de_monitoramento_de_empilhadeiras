@@ -325,3 +325,11 @@ CREATE SCHEMA empsys_checklist;
 CREATE TABLE empsys_checklist.checklist (id SERIAL NOT NULL, maquina_id INT NOT NULL, nome VARCHAR(510) NOT NULL, data_hora_realizado TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, operador VARCHAR(255) NOT NULL, observacoes_complementares_de_seguranca TEXT DEFAULT NULL, nivel_oleo_motor VARCHAR(3) NOT NULL, nivel_oleo_transmissao VARCHAR(3) NOT NULL, nivel_oleo_hidraulico VARCHAR(3) NOT NULL, nivel_agua_radiador VARCHAR(3) NOT NULL, vazamento_oleo VARCHAR(3) NOT NULL, vazamento_glp VARCHAR(3) NOT NULL, nivel_oleo_freio VARCHAR(3) NOT NULL, buzina_sinalizador_sonoro VARCHAR(3) NOT NULL, farois_lanternas_giroflex VARCHAR(3) NOT NULL, retrovisor VARCHAR(3) NOT NULL, pneus VARCHAR(3) NOT NULL, freio VARCHAR(3) NOT NULL, freio_de_mao VARCHAR(3) NOT NULL, sistema_de_direcao VARCHAR(3) NOT NULL, garfos_corrente_da_torre VARCHAR(3) NOT NULL, extintor_de_incendio VARCHAR(3) NOT NULL, cinto_de_seguranca_ebanco VARCHAR(3) NOT NULL, instrumentos_do_painel VARCHAR(3) NOT NULL, funcionamento_motor VARCHAR(3) NOT NULL, pintura_ecarenagens VARCHAR(3) NOT NULL, limpeza_geral_externa VARCHAR(3) NOT NULL, PRIMARY KEY(id));
 CREATE INDEX IDX_D26FC31241420729 ON empsys_checklist.checklist (maquina_id);
 ALTER TABLE empsys_checklist.checklist ADD CONSTRAINT FK_D26FC31241420729 FOREIGN KEY (maquina_id) REFERENCES empsys_maquina.maquina (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+
+ALTER TABLE empsys_checklist.checklist ADD ativo BOOLEAN DEFAULT true NOT NULL;
+ALTER TABLE empsys_local.local ALTER ativo SET DEFAULT true;
+ALTER TABLE empsys_maquina.maquina ALTER ativo SET DEFAULT true;
+ALTER TABLE empsys_maquina.modelo ALTER ativo SET DEFAULT true;
+ALTER TABLE empsys_maquina.fabricante ALTER ativo SET DEFAULT true;
+ALTER TABLE empsys_cliente.cliente ALTER ativo SET DEFAULT true;
