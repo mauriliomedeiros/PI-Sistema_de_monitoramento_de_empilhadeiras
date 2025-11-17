@@ -35,11 +35,17 @@
                         <td>{{ checklist.maquina.id }}</td>
                         <td>{{ checklist.operador }}</td>
                         <td>{{ checklist.dataHoraRealizado|date('d/m/Y H:i') }}</td>
-                        <td></td>
-{#                        <td>{{ maquina.ativo ? 'Sim' : 'Não' }}</td>#}
+                        <td>{{ checklist.ativo ? 'Sim' : 'Não' }}</td>
                         <td>
                             <a href="{{ path('checklist_show', {'id': checklist.id}) }}" class="btn btn-sm btn-outline-primary">Ver</a>
                             <a href="{{ path('checklist_edit', {'id': checklist.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            <a href="{{ path('checklist_alterar_status', {'id': checklist.id}) }}" class="btn btn-sm
+                                {% if checklist.ativo %}
+                                    btn-outline-danger">Inativar
+                                {% else %}
+                                    btn-outline-success">Ativar
+                                {% endif %}
+                            </a>
                         </td>
                     </tr>
                 {% else %}

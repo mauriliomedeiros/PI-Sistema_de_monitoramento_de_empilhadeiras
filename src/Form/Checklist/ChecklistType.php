@@ -216,6 +216,15 @@ class ChecklistType extends AbstractType
                         ->orderBy('m.id', 'ASC');
                 },
             ])
+            ->add('ativo', ChoiceType::class, [
+                'label' => false,
+                'placeholder' => '--Selecione--',
+                'choices' => [
+                    'Sim' => true,
+                    'Não' => false,
+                ],
+                'required' => true,
+            ])
         ;
     }
 

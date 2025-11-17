@@ -1,6 +1,6 @@
-ALTER TABLE empsys_checklist.checklist ADD ativo BOOLEAN DEFAULT true NOT NULL;
-ALTER TABLE empsys_local.local ALTER ativo SET DEFAULT true;
-ALTER TABLE empsys_maquina.maquina ALTER ativo SET DEFAULT true;
-ALTER TABLE empsys_maquina.modelo ALTER ativo SET DEFAULT true;
-ALTER TABLE empsys_maquina.fabricante ALTER ativo SET DEFAULT true;
-ALTER TABLE empsys_cliente.cliente ALTER ativo SET DEFAULT true;
+DROP INDEX uniq_eaf3fbdce7927c74;
+ALTER TABLE empsys_core.usuario ADD role VARCHAR(50) NOT NULL;
+ALTER TABLE empsys_core.usuario DROP roles;
+ALTER TABLE empsys_core.usuario ALTER nome SET NOT NULL;
+ALTER TABLE empsys_core.usuario ALTER sobrenome SET NOT NULL;
+ALTER TABLE empsys_core.usuario ALTER ativo SET NOT NULL;

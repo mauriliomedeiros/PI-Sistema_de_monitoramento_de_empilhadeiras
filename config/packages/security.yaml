@@ -1,23 +1,41 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Entity\Core\Usuario:
+            algorithm: bcrypt
+
     providers:
-        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\Core\Usuario
+                property: username
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main:
-            anonymous: lazy
-            provider: users_in_memory
+            anonymous: true
+            provider: app_user_provider
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                username_parameter: _username
+                password_parameter: _password
+                csrf_token_generator: security.csrf.token_manager
+                default_target_path: app_dashboard
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            logout:
+                path: app_logout
+                target: app_login
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # Permite acessar login sem estar logado
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Permite acessar o cadastro de usuário
+        - { path: ^/usuario/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Bloqueia tudo o resto
+        - { path: ^/, roles: ROLE_USER }

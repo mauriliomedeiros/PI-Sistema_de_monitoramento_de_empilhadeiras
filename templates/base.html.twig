@@ -34,6 +34,11 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
+                <li class="nav-item">
+                    <div class="nav-link" href="#">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Olá, {{ app.user.nome }}!</span></div>
+                </li>
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('app_dashboard') }}">
@@ -129,21 +134,22 @@
                     <div id="collapseAdmin" class="collapse" aria-labelledby="headingAdmin" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Opções:</h6>
-                            <a class="collapse-item" href="#">Usuários</a>
+                            <a class="collapse-item" href="{{ path('core_usuario_index') }}">Usuários</a>
+                            <a class="collapse-item" href="#">Funções</a>
                             <a class="collapse-item" href="#">Grupos</a>
                         </div>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_logout') }}">
+                        <i class="fas fa-fw fa-arrow-right"></i>
+                        <span>Sair (logout)</span>
+                    </a>
                 </li>
 
 
             </ul>
             <!-- End of Sidebar -->
-            {#                                <a class="nav-link" href="#">Início</a>#}
-            {#                                <a class="nav-link" href="#">Sobre</a>#}
-            {#                                <a class="nav-link" href="#">Empilhadeiras</a>#}
-            {#                                <a class="nav-link" href="#">Relatórios</a>#}
-            {#                                <a class="nav-link" href="#">Configurações</a>#}
-
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
@@ -160,8 +166,6 @@
 {#            <footer style="text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%;">#}
 {#                <p class="mensagem">© 2025 Projeto PI - 7° semestre do curso 'Ciência da Computação' do Centro Universitário FAM. Todos os direitos reservados.</p>#}
 {#            </footer>#}
-
-
         <!-- Bootstrap core JavaScript-->
         <script src="{{ asset('jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -174,6 +178,7 @@
 
         <!-- Page level plugins -->
         <script src="{{ asset('chart.js/Chart.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <!-- Page level custom scripts -->
         <script src={{ asset('js/demo/chart-area-demo.js') }}></script>

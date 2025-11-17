@@ -5,6 +5,9 @@ namespace App\Controller\Checklist;
 use App\Entity\Checklist\Checklist;
 use App\Form\Checklist\ChecklistType;
 use App\Repository\Checklist\ChecklistRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,6 +88,23 @@ class ChecklistController extends AbstractController
             $checklistRepository->remove($checklist);
         }
 
+        return $this->redirectToRoute('checklist_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/alterar/status/{id}", name="alterar_status", methods={"GET", "POST"})
+     */
+    public function alterarStatus(Checklist $checklist, EntityManagerInterface $em): Response
+    {
+        if ($checklist != '' and $checklist->getId()) {
+            if ($checklist->getAtivo()) {
+                $checklist->setAtivo(false);
+            } else {
+                $checklist->setAtivo(true);
+            }
+            $em->persist($checklist);
+            $em->flush();
+        }
         return $this->redirectToRoute('checklist_index', [], Response::HTTP_SEE_OTHER);
     }
 }

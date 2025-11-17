@@ -333,3 +333,16 @@ ALTER TABLE empsys_maquina.maquina ALTER ativo SET DEFAULT true;
 ALTER TABLE empsys_maquina.modelo ALTER ativo SET DEFAULT true;
 ALTER TABLE empsys_maquina.fabricante ALTER ativo SET DEFAULT true;
 ALTER TABLE empsys_cliente.cliente ALTER ativo SET DEFAULT true;
+
+CREATE SCHEMA empsys_core;
+CREATE TABLE empsys_core.usuario (id SERIAL NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id));
+ALTER TABLE empsys_core.usuario RENAME COLUMN email TO username;
+CREATE UNIQUE INDEX UNIQ_EAF3FBDCF85E0677 ON empsys_core.usuario (username);
+ALTER TABLE empsys_core.usuario ADD nome VARCHAR(100) NOT NULL;
+ALTER TABLE empsys_core.usuario ADD sobrenome VARCHAR(100) NOT NULL;
+ALTER TABLE empsys_core.usuario ADD ativo BOOLEAN DEFAULT true NOT NULL;
+ALTER TABLE empsys_core.usuario ADD role VARCHAR(50) NOT NULL;
+ALTER TABLE empsys_core.usuario DROP roles;
+ALTER TABLE empsys_core.usuario ALTER nome SET NOT NULL;
+ALTER TABLE empsys_core.usuario ALTER sobrenome SET NOT NULL;
+ALTER TABLE empsys_core.usuario ALTER ativo SET NOT NULL;

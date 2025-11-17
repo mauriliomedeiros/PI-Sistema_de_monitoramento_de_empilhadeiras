@@ -13,15 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LoginController extends AbstractController
 {
-    /**
-     * @Route("/login", name="app_login")
-     */
-    public function index(): Response
-    {
-        return $this->render('login/index.html.twig', [
-            'controller_name' => 'LoginController',
-        ]);
-    }
+//    /**
+//     * @Route("/login", name="app_login")
+//     */
+//    public function index(): Response
+//    {
+//        return $this->render('login/index.html.twig', [
+//            'controller_name' => 'LoginController',
+//        ]);
+//    }
 
     /**
      * @Route("/dashboard", name="app_dashboard", methods={"GET", "POST"})
@@ -34,6 +34,9 @@ class LoginController extends AbstractController
         ChecklistRepository $checklistRepository
     ): Response
     {
+        $usuario = $this->getUser();
+        dump($usuario);
+
         return $this->render('dashboard/index.html.twig', [
             'clientes' => $clienteRepository->findAll(),
             'locais' => $localRepository->findAll(),

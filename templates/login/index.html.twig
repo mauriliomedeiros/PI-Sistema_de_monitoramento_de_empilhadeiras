@@ -1,6 +1,6 @@
 {#{% extends 'base.html.twig' %}#}
 {#{% block title %}EMPSYS - LOGIN{% endblock %}#}
-<title>EMPSYS - LOGIN</title>
+<title>EMPSYS</title>
 {% block javascripts %}
     {{ encore_entry_link_tags('style') }}
 {% endblock %}
@@ -20,30 +20,52 @@
                             <div class="col-lg-6">
                                 <div class="p-5" style="margin-top: 60px">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Bem-vindo!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">BEM-VINDO AO EMPSYS!</h1>
                                     </div>
-                                    <form class="user">
-                                        <div class="form-group" style="margin-bottom: 5px">
-                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail">
-                                        </div>
-                                        <div class="form-group" style="margin-bottom: 5px">
-                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha">
-                                        </div>
-                                        <div class="form-group" style="margin-bottom: 5px">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Lembrar</label>
+                                    <form method="post" action="{{ path('app_login') }}">
+                                        {% if error %}
+                                            <div class="alert alert-danger">
+                                                {{ error.messageKey|trans(error.messageData, 'security') }}
                                             </div>
-                                        </div>
-                                        <a href="{{ path('app_dashboard') }}" class="btn btn-primary btn-user btn-block">Entrar</a>
+                                        {% endif %}
+
+                                        <label>Usuário</label>
+                                        <input type="text" name="_username" value="{{ last_username }}" class="form-control" required>
+                                        <label>Senha</label>
+                                        <input type="password" name="_password" class="form-control" required>
+
+                                        {# TOKEN CSRF OBRIGATÓRIO #}
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                        <button class="btn btn-primary mt-3 w-100">Entrar</button>
                                     </form>
+{#                                    <form class="user">#}
+{#                                        <div class="form-group" style="margin-bottom: 5px">#}
+{#                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail">#}
+{#                                        </div>#}
+{#                                        <div class="form-group" style="margin-bottom: 5px">#}
+{#                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha">#}
+{#                                        </div>#}
+{#                                        <div class="form-group" style="margin-bottom: 5px">#}
+{#                                            <div class="custom-control custom-checkbox small">#}
+{#                                                <input type="checkbox" class="custom-control-input" id="customCheck">#}
+{#                                                <label class="custom-control-label" for="customCheck">Lembrar</label>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <a href="{{ path('app_dashboard') }}" class="btn btn-primary btn-user btn-block">Entrar</a>#}
+{#                                    </form>#}
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Esqueceu a senha?</a>
+                                        <a class="small text-decoration-none text-dark" target="_blank" href="https://api.whatsapp.com/send?phone=5512982613932&text=Olá,%20tudo%20bem?%20Podem%20me%20ajudar%20com%20acesso%20ao%20EMPSYS?">
+                                            Problemas de acesso? Entre em contato com o suporte clicando aqui!
+                                        </a>
                                     </div>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Criar uma conta!</a>
-                                    </div>
+{#                                    <div class="text-center">#}
+{#                                        <a class="small" href="forgot-password.html">Esqueceu a senha?</a>#}
+{#                                    </div>#}
+{#                                    <div class="text-center">#}
+{#                                        <a class="small" href="register.html">Criar uma conta!</a>#}
+{#                                    </div>#}
                                 </div>
                             </div>
                         </div>
