@@ -46,6 +46,7 @@ class Maquina
 
     /**
      * @ORM\OneToMany(targetEntity=Checklist::class, mappedBy="maquina")
+     * @ORM\OrderBy({"dataHoraRealizado" = "DESC"})
      */
     private $checklists;
 

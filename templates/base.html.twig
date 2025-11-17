@@ -127,21 +127,24 @@
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmin"
-                       aria-expanded="true" aria-controls="collapseAdmin">
-                        <i class="fas fa-fw fa-toolbox"></i>
-                        <span>Administração</span>
-                    </a>
-                    <div id="collapseAdmin" class="collapse" aria-labelledby="headingAdmin" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Opções:</h6>
-                            <a class="collapse-item" href="{{ path('core_usuario_index') }}">Usuários</a>
-                            <a class="collapse-item" href="#">Funções</a>
-                            <a class="collapse-item" href="#">Grupos</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmin"
+                           aria-expanded="true" aria-controls="collapseAdmin">
+                            <i class="fas fa-fw fa-toolbox"></i>
+                            <span>Administração</span>
+                        </a>
+                        <div id="collapseAdmin" class="collapse" aria-labelledby="headingAdmin" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Opções:</h6>
+                                <a class="collapse-item" href="{{ path('core_usuario_index') }}">Usuários</a>
+{#                                <a class="collapse-item" href="#">Funções</a>#}
+{#                                <a class="collapse-item" href="#">Grupos</a>#}
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                {% endif %}
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_logout') }}">
                         <i class="fas fa-fw fa-arrow-right"></i>

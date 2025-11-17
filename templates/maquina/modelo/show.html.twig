@@ -35,7 +35,9 @@
 
             <div class="card-footer d-flex justify-content-between">
                 <a href="{{ path('maquina_modelo_index') }}" class="btn btn-info">Voltar</a>
-                <a href="{{ path('maquina_modelo_edit', {'id': modelo.id}) }}" class="btn btn-warning">Editar</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('maquina_modelo_edit', {'id': modelo.id}) }}" class="btn btn-warning">Editar</a>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -7,9 +7,11 @@
             <h5 class="mb-0 text-center">Máquinas</h5>
         </div>
         <div class="card-header d-flex justify-content-between">
-            <a href="{{ path('maquina_new') }}" class="btn btn-success">
-                Nova máquina
-            </a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('maquina_new') }}" class="btn btn-success">
+                    Nova máquina
+                </a>
+            {% endif %}
             <a href="{{ path('app_dashboard') }}" class="btn btn-info">
                 Voltar
             </a>
@@ -21,8 +23,9 @@
                     <th style="width: 5%">ID</th>            {# col-md-1 ~ 1/12 = 8.33%, ajustei para 5% pra ser mais compacto #}
                     <th style="width: 15%">Fabricante/Modelo</th> {# col-md-4 #}
                     <th style="width: 10%">Número de série</th> {# col-md-4 #}
-                    <th style="width: 30%">Cliente</th>      {# col-md-2 #}
+                    <th style="width: 25%">Cliente</th>      {# col-md-2 #}
                     <th style="width: 15%">Local</th>      {# col-md-2 #}
+                    <th style="width: 5%">Checklists</th>      {# col-md-2 #}
                     <th style="width: 10%">Ativo</th> {# col-md-4 #}
                     <th style="width: 15%">Ações</th>        {# col-md-2 #}
                 </tr>
@@ -35,10 +38,13 @@
                         <td>{{ maquina.serialNumber }}</td>
                         <td>{{ maquina.local.cliente.razaoSocial }}</td>
                         <td>{{ maquina.local.nome }}</td>
+                        <td>{{ maquina.checklists|length }}</td>
                         <td>{{ maquina.ativo ? 'Sim' : 'Não' }}</td>
                         <td>
                             <a href="{{ path('maquina_show', {'id': maquina.id}) }}" class="btn btn-sm btn-outline-primary">Ver</a>
-                            <a href="{{ path('maquina_edit', {'id': maquina.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('maquina_edit', {'id': maquina.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}

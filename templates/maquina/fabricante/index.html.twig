@@ -7,9 +7,11 @@
                 <h5 class="mb-0 text-center">Fabricantes</h5>
             </div>
             <div class="card-header d-flex justify-content-between">
-                <a href="{{ path('maquina_fabricante_new') }}" class="btn btn-success">
-                    Novo fabricante
-                </a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('maquina_fabricante_new') }}" class="btn btn-success">
+                        Novo fabricante
+                    </a>
+                {% endif %}
                 <a href="{{ path('app_dashboard') }}" class="btn btn-info">
                     Voltar
                 </a>
@@ -32,7 +34,9 @@
                             <td>{{ fabricante.ativo ? 'Sim' : 'Não' }}</td>
                             <td>
                                 <a href="{{ path('maquina_fabricante_show', {'id': fabricante.id}) }}" class="btn btn-sm btn-outline-primary">Ver</a>
-                                <a href="{{ path('maquina_fabricante_edit', {'id': fabricante.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('maquina_fabricante_edit', {'id': fabricante.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% else %}

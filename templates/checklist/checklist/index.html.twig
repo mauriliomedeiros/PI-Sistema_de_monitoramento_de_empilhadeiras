@@ -38,7 +38,9 @@
                         <td>{{ checklist.ativo ? 'Sim' : 'Não' }}</td>
                         <td>
                             <a href="{{ path('checklist_show', {'id': checklist.id}) }}" class="btn btn-sm btn-outline-primary">Ver</a>
-                            <a href="{{ path('checklist_edit', {'id': checklist.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('checklist_edit', {'id': checklist.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            {% endif %}
                             <a href="{{ path('checklist_alterar_status', {'id': checklist.id}) }}" class="btn btn-sm
                                 {% if checklist.ativo %}
                                     btn-outline-danger">Inativar

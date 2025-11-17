@@ -10,9 +10,11 @@
                 <h5 class="mb-0 text-center">Locais</h5>
             </div>
             <div class="card-header d-flex justify-content-between">
-                <a href="{{ path('local_new') }}" class="btn btn-success">
-                    Novo local
-                </a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('local_new') }}" class="btn btn-success">
+                        Novo local
+                    </a>
+                {% endif %}
                 <a href="{{ path('app_dashboard') }}" class="btn btn-info">
                     Voltar
                 </a>
@@ -41,7 +43,9 @@
                             <td>{{ local.ativo ? 'Sim' : 'Não' }}</td>
                             <td>
                                 <a href="{{ path('local_show', {'id': local.id}) }}" class="btn btn-sm btn-outline-primary">Ver</a>
-                                <a href="{{ path('local_edit', {'id': local.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('local_edit', {'id': local.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% else %}

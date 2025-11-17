@@ -7,9 +7,11 @@
             <h5 class="mb-0 text-center">Modelos</h5>
         </div>
         <div class="card-header d-flex justify-content-between">
-            <a href="{{ path('maquina_modelo_new') }}" class="btn btn-success">
-                Novo modelo
-            </a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('maquina_modelo_new') }}" class="btn btn-success">
+                    Novo modelo
+                </a>
+            {% endif %}
             <a href="{{ path('app_dashboard') }}" class="btn btn-info">
                 Voltar
             </a>
@@ -34,7 +36,9 @@
                         <td>{{ modelo.ativo ? 'Sim' : 'Não' }}</td>
                         <td>
                             <a href="{{ path('maquina_modelo_show', {'id': modelo.id}) }}" class="btn btn-sm btn-outline-primary">Ver</a>
-                            <a href="{{ path('maquina_modelo_edit', {'id': modelo.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('maquina_modelo_edit', {'id': modelo.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}

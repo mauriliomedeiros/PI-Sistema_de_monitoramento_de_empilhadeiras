@@ -42,7 +42,8 @@ class LoginController extends AbstractController
             'locais' => $localRepository->findAll(),
             'modelos' => $modeloRepository->findAll(),
             'maquinas' => $maquinaRepository->findAll(),
-            'checklists' => $checklistRepository->findAll()
+            'checklists' => $checklistRepository->findAll(),
+            'usuario' => $usuario
         ]);
     }
 

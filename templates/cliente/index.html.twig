@@ -10,9 +10,11 @@
                 <h5 class="mb-0 text-center">Clientes</h5>
             </div>
             <div class="card-header d-flex justify-content-between">
-                <a href="{{ path('cliente_new') }}" class="btn btn-success">
-                    Novo cliente
-                </a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('cliente_new') }}" class="btn btn-success">
+                        Novo cliente
+                    </a>
+                {% endif %}
                 <a href="{{ path('app_dashboard') }}" class="btn btn-info">
                     Voltar
                 </a>
@@ -41,7 +43,9 @@
                             <td>{{ cliente.ativo ? 'Sim' : 'Não' }}</td>
                             <td>
                                 <a href="{{ path('cliente_show', {'id': cliente.id}) }}" class="btn btn-sm btn-outline-primary">Ver</a>
-                                <a href="{{ path('cliente_edit', {'id': cliente.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('cliente_edit', {'id': cliente.id}) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% else %}

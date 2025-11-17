@@ -32,8 +32,35 @@
                             <div class="col-md-2 font-weight-bold">ID: <a href="{{ path('checklist_show', {'id': checklist.id}) }}">{{ checklist.id }}</a></div>
                             <div class="col-md-3"><span class="font-weight-bold">Nome:</span> {{ checklist.nome }}</div>
                             <div class="col-md-2"><span class="font-weight-bold">Realizado em:</span> {{ checklist.dataHoraRealizado|date('d/m/Y H:i') }}</div>
-                            <div class="col-md-3"><span class="font-weight-bold">Operador:</span> {{ checklist.operador }}</div>
-                            <div class="col-md-2"><span class="font-weight-bold">Status:</span> OK</div>
+                            <div class="col-md-3"><span class="font-weight-bold">Operador:</span> {{ checklist.operador.nome }} {{ checklist.operador.sobrenome }}</div>
+                            <div class="col-md-2"><span class="font-weight-bold">Status: </span>
+                                {% if
+                                    checklist.nivelOleoMotor == 'NOK'
+                                    or checklist.nivelOleoTransmissao == 'NOK'
+                                    or checklist.nivelOleoHidraulico == 'NOK'
+                                    or checklist.nivelAguaRadiador == 'NOK'
+                                    or checklist.vazamentoOleo == 'NOK'
+                                    or checklist.vazamentoGLP == 'NOK'
+                                    or checklist.nivelOleoFreio == 'NOK'
+                                    or checklist.buzinaSinalizadorSonoro == 'NOK'
+                                    or checklist.faroisLanternasGiroflex == 'NOK'
+                                    or checklist.retrovisor == 'NOK'
+                                    or checklist.pneus == 'NOK'
+                                    or checklist.freio == 'NOK'
+                                    or checklist.freioDeMao == 'NOK'
+                                    or checklist.sistemaDeDirecao == 'NOK'
+                                    or checklist.garfosCorrenteDaTorre == 'NOK'
+                                    or checklist.extintorDeIncendio == 'NOK'
+                                    or checklist.cintoDeSegurancaEBanco == 'NOK'
+                                    or checklist.instrumentosDoPainel == 'NOK'
+                                    or checklist.funcionamentoMotor == 'NOK'
+                                    or checklist.pinturaECarenagens == 'NOK'
+                                    or checklist.limpezaGeralExterna == 'NOK'
+                                %} <i class="fa fa-times-circle text-danger"></i>
+                                {% else %}
+                                    <i class="fa fa-check-circle text-success"></i>
+                                {% endif %}
+                            </div>
                         {% endfor %}
                     {% endif %}
                 </div>
@@ -41,7 +68,9 @@
 
             <div class="card-footer d-flex justify-content-between">
                 <a href="{{ path('maquina_index') }}" class="btn btn-info">Voltar</a>
-                <a href="{{ path('maquina_edit', {'id': maquina.id}) }}" class="btn btn-warning">Editar</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('maquina_edit', {'id': maquina.id}) }}" class="btn btn-warning">Editar</a>
+                {% endif %}
             </div>
         </div>
     </div>
