@@ -3,7 +3,9 @@
 namespace App\Form\Checklist;
 
 use App\Entity\Checklist\Checklist;
+use App\Entity\Core\Usuario;
 use App\Entity\Maquina\Maquina;
+use App\Repository\Core\UsuarioRepository;
 use App\Repository\Maquina\MaquinaRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -17,6 +19,9 @@ class ChecklistType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $usuarioLogado = $options['usuario_logado'];
+        dump($usuarioLogado);
+
         $builder
             ->add('nome', TextType::class, [
                 'label' => false,
@@ -24,11 +29,22 @@ class ChecklistType extends AbstractType
                     'maxlength' => 255,
                 ]
             ])
-            ->add('operador', TextType::class, [
+            ->add('operador', EntityType::class, [
+                'class' => Usuario::class,
+                'choice_label' => function ($usuario) {
+                    return $usuario->getNome() .' (' . $usuario->getUsername() . ')';
+                },
                 'label' => false,
-                'attr' => [
-                    'maxlength' => 255,
-                ]
+                'placeholder' => '---Selecione---',
+                'query_builder' => function (UsuarioRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.ativo = :ativo')
+                        ->setParameter('ativo', true)
+                        ->orderBy('u.id', 'ASC');
+                },
+                'mapped' => false,
+                'data' => $usuarioLogado,
+                'disabled' => true
             ])
             ->add('observacoesComplementaresDeSeguranca', TextareaType::class, [
                 'required' => false,
@@ -232,6 +248,7 @@ class ChecklistType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Checklist::class,
+            'usuario_logado' => null,
         ]);
     }
 }

@@ -19,6 +19,7 @@ Encore
     .enableSassLoader()
     .enableSingleRuntimeChunk()
     .addEntry('app', './assets/app.js') // Arquivo principal JS
+    .addEntry('dashboard', './assets/dashboard.js') // Arquivo principal JS
     .addStyleEntry('style', './assets/styles/app.scss'); // Arquivo principal CSS
 
 

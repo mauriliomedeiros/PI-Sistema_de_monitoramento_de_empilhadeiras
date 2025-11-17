@@ -15,7 +15,9 @@
         <!-- Custom styles for this template-->
         <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+            {% block head_script %}
+                {{ encore_entry_script_tags('app') }}
+            {% endblock head_script %}
         {% endblock %}
     </head>
     <body>

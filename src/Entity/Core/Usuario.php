@@ -2,7 +2,10 @@
 
 namespace App\Entity\Core;
 
+use App\Entity\Checklist\Checklist;
 use App\Repository\Core\UsuarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -50,6 +53,16 @@ class Usuario implements UserInterface
      */
     private $ativo = true;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Checklist::class, mappedBy="operador")
+     */
+    private $checklists;
+
+    public function __construct()
+    {
+        $this->checklists = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,11 +88,11 @@ class Usuario implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->role;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        if ($this->role) {
+            return [$this->role];
+        }
 
-        return array_unique($roles);
+        return ['ROLE_USER'];
     }
 
     public function setRole(string $role): self
@@ -160,6 +173,36 @@ class Usuario implements UserInterface
     public function setSobrenome(string $sobrenome): self
     {
         $this->sobrenome = $sobrenome;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Checklist>
+     */
+    public function getChecklists(): Collection
+    {
+        return $this->checklists;
+    }
+
+    public function addChecklist(Checklist $checklist): self
+    {
+        if (!$this->checklists->contains($checklist)) {
+            $this->checklists[] = $checklist;
+            $checklist->setOperador($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChecklist(Checklist $checklist): self
+    {
+        if ($this->checklists->removeElement($checklist)) {
+            // set the owning side to null (unless already changed)
+            if ($checklist->getOperador() === $this) {
+                $checklist->setOperador(null);
+            }
+        }
 
         return $this;
     }

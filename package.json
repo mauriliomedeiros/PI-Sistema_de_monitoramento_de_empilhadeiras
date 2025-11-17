@@ -16,7 +16,9 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.8",
+        "bootbox": "^6.0.4",
         "bootstrap": "^5.3.8",
+        "bootstrap-toggle": "^2.2.2",
         "bootstrap4-toggle": "^3.6.1",
         "chart.js": "^4.5.1",
         "file-loader": "^6.2.0",

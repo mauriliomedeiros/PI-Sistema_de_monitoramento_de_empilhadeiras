@@ -65,7 +65,7 @@ class MaquinaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $maquinaRepository->add($maquina);
-            return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('maquina_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('maquina/maquina/edit.html.twig', [
@@ -83,6 +83,6 @@ class MaquinaController extends AbstractController
             $maquinaRepository->remove($maquina);
         }
 
-        return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('maquina_index', [], Response::HTTP_SEE_OTHER);
     }
 }

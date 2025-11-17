@@ -346,3 +346,18 @@ ALTER TABLE empsys_core.usuario DROP roles;
 ALTER TABLE empsys_core.usuario ALTER nome SET NOT NULL;
 ALTER TABLE empsys_core.usuario ALTER sobrenome SET NOT NULL;
 ALTER TABLE empsys_core.usuario ALTER ativo SET NOT NULL;
+
+
+CREATE TABLE empsys_core.role (id SERIAL NOT NULL, nome VARCHAR(255) NOT NULL, ativo BOOLEAN NOT NULL, PRIMARY KEY(id));
+ALTER TABLE empsys_checklist.checklist ADD operador_id INT NOT NULL;
+ALTER TABLE empsys_checklist.checklist DROP operador;
+ALTER TABLE empsys_checklist.checklist ADD CONSTRAINT FK_D26FC3125B939A38 FOREIGN KEY (operador_id) REFERENCES empsys_core.usuario (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+CREATE INDEX IDX_D26FC3125B939A38 ON empsys_checklist.checklist (operador_id);
+ALTER TABLE empsys_core.usuario ALTER nome SET NOT NULL;
+ALTER TABLE empsys_core.usuario ALTER sobrenome SET NOT NULL;
+ALTER TABLE empsys_core.usuario ALTER ativo SET DEFAULT true;
+ALTER TABLE empsys_core.usuario ALTER ativo SET NOT NULL;
+ALTER TABLE empsys_core.usuario ALTER role SET NOT NULL;
+
+ALTER TABLE empsys_maquina.maquina ADD serial_number VARCHAR(255) NOT NULL;
+ALTER TABLE empsys_maquina.maquina DROP cliente_id;

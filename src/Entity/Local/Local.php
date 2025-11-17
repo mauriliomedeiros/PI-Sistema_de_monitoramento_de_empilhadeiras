@@ -203,4 +203,9 @@ class Local
 
         return $this;
     }
+
+    public function getNomeComCliente(): string
+    {
+        return $this->nome . ' (' . $this->cliente->getRazaoSocial() . ')';
+    }
 }

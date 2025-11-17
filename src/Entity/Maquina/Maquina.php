@@ -30,11 +30,6 @@ class Maquina
     private $modelo;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Cliente::class, inversedBy="maquinas")
-     */
-    private $cliente;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Local::class, inversedBy="maquinas")
      */
     private $local;
@@ -54,6 +49,11 @@ class Maquina
      */
     private $checklists;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $serialNumber;
+
     public function __construct()
     {
         $this->checklists = new ArrayCollection();
@@ -72,18 +72,6 @@ class Maquina
     public function setModelo(?Modelo $modelo): self
     {
         $this->modelo = $modelo;
-
-        return $this;
-    }
-
-    public function getCliente(): ?Cliente
-    {
-        return $this->cliente;
-    }
-
-    public function setCliente(?Cliente $cliente): self
-    {
-        $this->cliente = $cliente;
 
         return $this;
     }
@@ -150,6 +138,18 @@ class Maquina
                 $checklist->setMaquina(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSerialNumber(): ?string
+    {
+        return $this->serialNumber;
+    }
+
+    public function setSerialNumber(string $serialNumber): self
+    {
+        $this->serialNumber = $serialNumber;
 
         return $this;
     }

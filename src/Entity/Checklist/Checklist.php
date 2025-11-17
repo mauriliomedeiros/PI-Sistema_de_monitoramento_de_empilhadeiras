@@ -2,6 +2,7 @@
 
 namespace App\Entity\Checklist;
 
+use App\Entity\Core\Usuario;
 use App\Entity\Maquina\Maquina;
 use App\Repository\Checklist\ChecklistRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -35,10 +36,10 @@ class Checklist
      */
     private $dataHoraRealizado;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $operador;
+//    /**
+//     * @ORM\Column(type="string", length=255)
+//     */
+//    private $operador;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -155,6 +156,12 @@ class Checklist
      */
     private $ativo = true;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuario::class, inversedBy="checklists")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $operador;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -196,17 +203,17 @@ class Checklist
         return $this;
     }
 
-    public function getOperador(): ?string
-    {
-        return $this->operador;
-    }
-
-    public function setOperador(string $operador): self
-    {
-        $this->operador = $operador;
-
-        return $this;
-    }
+//    public function getOperador(): ?string
+//    {
+//        return $this->operador;
+//    }
+//
+//    public function setOperador(string $operador): self
+//    {
+//        $this->operador = $operador;
+//
+//        return $this;
+//    }
 
     public function getObservacoesComplementaresDeSeguranca(): ?string
     {
@@ -480,6 +487,18 @@ class Checklist
     public function setAtivo(bool $ativo): self
     {
         $this->ativo = $ativo;
+
+        return $this;
+    }
+
+    public function getOperador(): ?Usuario
+    {
+        return $this->operador;
+    }
+
+    public function setOperador(?Usuario $operador): self
+    {
+        $this->operador = $operador;
 
         return $this;
     }

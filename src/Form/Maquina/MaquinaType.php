@@ -27,7 +27,7 @@ class MaquinaType extends AbstractType
             ])
             ->add('modelo', EntityType::class, [
                 'class' => Modelo::class,
-                'choice_label' => 'nome',
+                'choice_label' => 'getNomeComFabricante',
                 'label' => false,
                 'placeholder' => '---Selecione---',
                 'query_builder' => function (ModeloRepository $er) {
@@ -37,21 +37,13 @@ class MaquinaType extends AbstractType
                         ->orderBy('m.nome', 'ASC');
                 },
             ])
-            ->add('cliente', EntityType::class, [
-                'class' => Cliente::class,
-                'choice_label' => 'razao_social',
+            ->add('serialNumber', TextType::class, [
+                'required' => true,
                 'label' => false,
-                'placeholder' => '---Selecione---',
-                'query_builder' => function (ClienteRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->where('c.ativo = :ativo')
-                        ->setParameter('ativo', true)
-                        ->orderBy('c.razao_social', 'ASC');
-                },
             ])
             ->add('local', EntityType::class, [
                 'class' => Local::class,
-                'choice_label' => 'nome',
+                'choice_label' => 'getNomeComCliente',
                 'label' => false,
                 'placeholder' => '---Selecione---',
                 'query_builder' => function (LocalRepository $er) {

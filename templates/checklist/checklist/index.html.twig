@@ -20,7 +20,7 @@
                 <tr>
                     <th style="width: 5%">ID</th>            {# col-md-1 ~ 1/12 = 8.33%, ajustei para 5% pra ser mais compacto #}
                     <th style="width: 20%">Fabricante/Modelo</th> {# col-md-4 #}
-                    <th style="width: 15%">Máquina ID</th> {# col-md-4 #}
+                    <th style="width: 15%">Máquina S/N</th> {# col-md-4 #}
                     <th style="width: 20%">Operador</th>      {# col-md-2 #}
                     <th style="width: 15%">Data e hora</th>      {# col-md-2 #}
                     <th style="width: 10%">Ativo</th> {# col-md-4 #}
@@ -32,8 +32,8 @@
                     <tr>
                         <td>{{ checklist.id }}</td>
                         <td>{{ checklist.maquina.modelo.fabricante.nome }} {{ checklist.maquina.modelo.nome }}</td>
-                        <td>{{ checklist.maquina.id }}</td>
-                        <td>{{ checklist.operador }}</td>
+                        <td>{{ checklist.maquina.serialNumber|default('') }}</td>
+                        <td>{{ checklist.operador.nome|default('') }}</td>
                         <td>{{ checklist.dataHoraRealizado|date('d/m/Y H:i') }}</td>
                         <td>{{ checklist.ativo ? 'Sim' : 'Não' }}</td>
                         <td>

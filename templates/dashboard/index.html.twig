@@ -1,4 +1,8 @@
 {% extends 'base.html.twig' %}
+{% block head_script %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('dashboard') }}
+{% endblock head_script %}
 {% block content %}
     <br>
     {#    <div class="container mt-4"> #}

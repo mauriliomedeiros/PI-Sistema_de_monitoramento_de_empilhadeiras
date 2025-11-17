@@ -31,11 +31,11 @@ security:
                 target: app_login
 
     access_control:
-        # Permite acessar login sem estar logado
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Permite acessar o cadastro de usuário
-        - { path: ^/usuario/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Bloqueia tudo o resto
-        - { path: ^/, roles: ROLE_USER }
+#        # Permite acessar login sem estar logado
+#        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#
+#        # Permite acessar o cadastro de usuário
+#        - { path: ^/usuario/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#
+#        # Bloqueia tudo o resto
+#        - { path: ^/, roles: ROLE_USER }

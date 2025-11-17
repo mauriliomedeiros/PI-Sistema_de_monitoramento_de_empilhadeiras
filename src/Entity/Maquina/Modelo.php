@@ -172,4 +172,9 @@ class Modelo
 
         return $this;
     }
+
+    public function getNomeComFabricante(): string
+    {
+        return $this->nome . ' (' . $this->fabricante->getNome() . ')';
+    }
 }

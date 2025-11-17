@@ -34,12 +34,19 @@ class ChecklistController extends AbstractController
     public function new(Request $request, ChecklistRepository $checklistRepository): Response
     {
         $checklist = new Checklist();
-        $form = $this->createForm(ChecklistType::class, $checklist);
+        $usuario = $this->getUser();
+        dump($usuario);
+        $form = $this->createForm(ChecklistType::class, $checklist, [
+            'usuario_logado' => $this->getUser(),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $dataAtual = new \DateTime('now', new \DateTimeZone('America/Sao_Paulo'));
             $checklist->setDataHoraRealizado($dataAtual);
+            dump($checklist);
+            $checklist->setOperador($usuario);
+            dump($checklist);
             $checklistRepository->add($checklist);
             return $this->redirectToRoute('checklist_index', [], Response::HTTP_SEE_OTHER);
         }
