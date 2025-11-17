@@ -17,9 +17,62 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     // enables Sass/SCSS support
     .enableSassLoader()
+    .splitEntryChunks()
     .enableSingleRuntimeChunk()
     .addEntry('app', './assets/app.js') // Arquivo principal JS
-    .addStyleEntry('style', './assets/styles/app.scss'); // Arquivo principal CSS
+    .addStyleEntry('style', './assets/styles/app.scss')
+
+    .configureBabel((config) => {
+        config.plugins.push('@babel/plugin-proposal-class-properties');
+    })
+
+    // enables @babel/preset-env polyfills
+    .configureBabelPresetEnv((config) => {
+        config.useBuiltIns = 'usage';
+        config.corejs = 3;
+    })
+
+    .autoProvidejQuery()
+    .enableLessLoader()
+    .autoProvideVariables({
+        moment: 'moment',
+        bootbox: 'bootbox',
+    })
+
+
+; // Arquivo principal CSS
+
+
+var config = Encore.getWebpackConfig();
+var path = require('path');
+config.resolve.alias = {
+    // Force all modules to use the same jquery version.
+    'jquery': path.join(__dirname, 'node_modules/jquery/dist/jquery')
+};
+
+module.exports = {
+    module: {
+        loaders: [
+            {test: /jquery-mousewheel/, loader: "imports?define=>false&this=>window"},
+            {test: /malihu-custom-scrollbar-plugin/, loader: "imports?define=>false&this=>window"}
+        ]
+    }
+};
+
+module.exports = {
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.$': 'jquery',
+            'window.jQuery': 'jquery',
+            'top.$': 'jquery', // Se necessário
+            'top.jQuery': 'jquery', // Se necessário
+            'bootbox': 'bootbox', // Se necessário
+            'moment': 'moment' // Se necessário
+        })
+    ]
+};
 
 
 module.exports = Encore.getWebpackConfig();
